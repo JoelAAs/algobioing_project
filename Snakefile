@@ -8,8 +8,10 @@ test = ["as2.assoc", ]
 def input_plots(wildcards):
     checkpoint_output = checkpoints.generate_plots.get(**wildcards).output[0]
     print(checkpoint_output)
+    plots = os.listdir(checkpoint_output)
+    plots = [p for p in plots if p[-4:-1] == ".pn"]
     return expand(checkpoint_output + "/{image}",
-            image = os.listdir(checkpoint_output))
+            image = plots)
 
 
 # RULE
@@ -27,8 +29,8 @@ rule generate_infographics:
         """
         echo {output.html_report}
         mkdir -p run_folder/report
-        Rscript -e "rmarkdown::render('bin/generate_sample_report.Rmd', output_file='../{output.html_report}')" \
-                     --args {wildcards.assoc} {input}
+        Rscript -e "library(rmdformats); rmarkdown::render('src/generate_sample_report.Rmd', output_file='../{output.html_report}', output_format=c('readthedown'))" \
+            --args {wildcards.assoc} {input}
         """
 
 
@@ -55,7 +57,7 @@ rule get_feature_matrix:
         annotated = "run_folder/{assoc}.annotated.tsv"
     shell:
         """
-        Rscript bin/get_gene_from_rsid.R \
+        Rscript src/get_gene_from_rsid.R \
             --args
             --association_file={input} \
             --annotated_output={output.annotated} \

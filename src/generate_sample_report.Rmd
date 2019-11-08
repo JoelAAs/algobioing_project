@@ -1,0 +1,47 @@
+```{r input, include=FALSE, echo=FALSE}
+## AUTHOR: Joel Ås
+args <- commandArgs(TRUE)
+print(args)
+title <- args[2]
+plots <- args[-(1:2)]
+
+get_names <- function(png_path){
+  name <- tail(strsplit(png_path, "/")[[1]], 1) %>% 
+    {sub(".png","", .)}
+  return(name)
+}
+
+
+library(tidyverse)
+library(kableExtra)
+```
+
+---
+title: "`r title`"
+author: "Joel Ås"
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output_format:
+    html_document:
+        toc: True
+        theme: "readthedown"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Method and data
+The input data is: `r title`, this is the exemple data from the [plink tutorial](http://zzz.bwh.harvard.edu/plink/tutorial.shtml). Each variant ID is queried in ensabmbl's variant database to find associated genes IDs through the R library `BioMart`. Each unique gene KEGG BRITE hierarchy is queried using R-library `KEGGREST`. The BRITE annotation data is transfromed into a feature matrix (`r paste0(title, ".mat")`) and gene annotation data is saved under (`r paste0(title, ".ann")`).
+
+The only association keept are those with $p \neq \varnothing$, have a associated gene and BRITE annotation. Features with less than $5 %$ prevelance within the are also filtered out.
+
+For each BRITE, q-values are calculated and plotted under `run_folder/plots/{association}/{brite_group}.png`.
+
+# Association plots
+```{r, results='asis'}
+for (current_plot in plots){ 
+   cat("## Group: ", get_names(current_plot), "\n") 
+   cat("![]", "(../", current_plot, ")", sep="")
+   cat("\n\n")
+}
+```
