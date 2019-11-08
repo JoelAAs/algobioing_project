@@ -17,7 +17,7 @@ def input_plots(wildcards):
 # RULE
 rule all:
     input:
-        expand("run_folder/report/{assoc}.html", assoc=test)
+        expand("results/{assoc}.html", assoc=test)
 
 
 rule generate_infographics:
