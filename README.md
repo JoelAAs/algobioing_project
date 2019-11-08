@@ -1,8 +1,6 @@
 # Entropy Filtering for Multiple-sequence alignments
 ## About
-Project for the Applied Bioinformatics course taken by participants of [**Medbioinfo**](http://www.medbioinfo.se/)
-
-This workflow is for trimming noisy regions from MSA using measurements of information entropy of said position. 
+Project for Algorithmic Bioinformatics course taken by participants of [**Medbioinfo**](http://www.medbioinfo.se/)
 
 ## Prerequisites
 + `Python 3.7.3`
@@ -26,7 +24,7 @@ git clone https://github.com/patruong/appliedBioinformaticsMSA
 ```
 
 ## Running
-Move association files to `input/` and add filename to `python test = []` to the `Snakefile`
+Move association files to `input/` and add filename to `python test = []` to the `Snakefile`.  
 Now just run `snakemake` like in your project folder.
 
 ## Output
