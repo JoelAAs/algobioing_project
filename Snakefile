@@ -24,11 +24,10 @@ rule generate_infographics:
     input:
         input_plots
     output:
-        html_report = "run_folder/report/{assoc}.html"
+        html_report = "results/{assoc}.html"
     shell:
         """
-        echo {output.html_report}
-        mkdir -p run_folder/report
+        mkdir -p results
         Rscript -e "library(rmdformats); rmarkdown::render('src/generate_sample_report.Rmd', output_file='../{output.html_report}', output_format=c('readthedown'))" \
             --args {wildcards.assoc} {input}
         """
