@@ -23,8 +23,17 @@ This workflow will annotate associations provided with associated genes and [KEG
 ## Setup
 First clone this repo into desired location.
 ```
-git clone https://github.com/patruong/appliedBioinformaticsMSA                   
+git clone https://github.com/JoelAAs/algobioing_project 
 ```
+
+For python packages I'd reccomend installing them through Conda.
+
+The R to install run:
+```{r}
+install.packages(c("tidyverse",  "magrittr", "reshape2", "BiocManager"))
+BiocManager::install(c("biomaRt", "KEGGREST"))
+``` 
+
 
 ## Running
 Move association files to `input/` and add filename to `python test = []` to the `Snakefile`.  
