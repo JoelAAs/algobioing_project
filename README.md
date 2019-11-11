@@ -1,5 +1,5 @@
-# Entropy Filtering for Multiple-sequence alignments
-## About
+# FDR-adjusting associations p-values grouped on BRITE hierachy  
+# About
 Project for Algorithmic Bioinformatics course taken by participants of [**Medbioinfo**](http://www.medbioinfo.se/)
 
 This workflow will annotate associations provided with associated genes and [KEGG Funtional hierachies](https://www.genome.jp/kegg/kegg3b.html). Using the distribution of for each feature group it calculates q-values and output visualisation (manhattan plots, p-value distribution etc). 
